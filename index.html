@@ -16,15 +16,23 @@
 
 <body>
 
-<div class="input form">
-<p>Город <input type="text" id="userCity"/></p>
-<input type="button" value="Узнать погоду!" onclick="getWeather();"/>
+<div class="inputForm">
+    <p class="city">Город <input type="text" id="userCity" class="textbox"/></p>
+    <input class="button" type="button" value="Узнать погоду!" onclick="getWeather();"/>
 </div>
 
 <div id="content"></div>
 </body>
 
 <script type="text/javascript">
+    document.getElementById("userCity")
+        .addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+               getWeather();
+            }
+        });
+
 function getWeather() {
     var enteredCity = document.getElementById('userCity').value;
 
