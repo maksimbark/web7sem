@@ -1,0 +1,5 @@
+.weather-list__li {
+    list-style: none;
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0;
+}
