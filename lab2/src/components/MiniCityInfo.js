@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import WeatherPack from './WeatherPack/'
-import {doAddItem, itemsFetchData} from "../actions/items";
+import {doDeleteItem, itemsFetchData} from "../actions/items";
 import {connect} from "react-redux";
 
 
@@ -35,7 +35,7 @@ class MiniCityInfo extends Component {
                         <h4 className="p-2 ml-auto">{this.props.serverInfo.data.main.temp}˚C</h4>
                         <img className="p-2 ml-auto" alt="icon"
                              src={'https://openweathermap.org/img/wn/' + icon + '.png'}/>
-                        <button className="btn btn-default p-2 ml-auto">X</button>
+                        <button onClick={() => this.props.delete(this.props.serverInfo.city)} className="btn btn-default p-2 ml-auto">X</button>
                     </div>
 
                     <WeatherPack serverInfo={this.props.serverInfo.data}/>
@@ -56,7 +56,7 @@ class MiniCityInfo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        //items: state.items,
+        items: state.items,
         //hasErrored: state.itemsHasErrored,
         //isLoading: state.itemsIsLoading
     };
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => dispatch(itemsFetchData(url)),
-        add: (city) => dispatch(doAddItem(city))
+        delete: (city) => dispatch(doDeleteItem(city))
     };
 };
 

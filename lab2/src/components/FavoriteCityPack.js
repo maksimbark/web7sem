@@ -58,8 +58,6 @@ const mapStateToProps = (state) => {
     return {
         newCityValue: state.newCityValue,
         items: state.items,
-        hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
     };
 };
 

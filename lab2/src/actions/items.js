@@ -1,14 +1,7 @@
-export function itemsHasErrored(bool) {
+export function itemsHasErrored(city) {
     return {
         type: 'ITEMS_HAS_ERRORED',
-        hasErrored: bool
-    };
-}
-
-export function itemsIsLoading(bool) {
-    return {
-        type: 'ITEMS_IS_LOADING',
-        isLoading: bool
+        city
     };
 }
 
@@ -36,6 +29,19 @@ export function changeCityInpit(item) {
     };
 }
 
+export function deleteItem(city) {
+    return {
+        type: 'DELETE_ITEM',
+        city
+    };
+}
+
+export function doDeleteItem(city) {
+    return (dispatch) => {
+        dispatch(deleteItem(city));
+    };
+}
+
 export function doChangeInput(item) {
     return (dispatch) => {
         dispatch(changeCityInpit(item));
@@ -51,22 +57,18 @@ export function doAddItem(item) {
 
 export function itemsFetchData(city) {
     return (dispatch) => {
-        dispatch(itemsIsLoading(true));
-
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3c6464a2f6bcbeecf2f55441edb741ce`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3c6464a2f6bcbeecf2f55441edb741ce&units=metric&lang=ru`)
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-
-                dispatch(itemsIsLoading(false));
 
                 return response;
             })
             .then((response) => response.json())
             .then((response) => dispatch(itemsFetchDataSuccess(response, city)))
             .then((response) => console.log(response, city))
-           // .catch(() => dispatch(itemsHasErrored(true)));
+            .catch(() => dispatch(itemsHasErrored(city)));
     };
 
 }

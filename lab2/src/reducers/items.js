@@ -1,23 +1,3 @@
-export function itemsHasErrored(state = false, action) {
-    switch (action.type) {
-        case 'ITEMS_HAS_ERRORED':
-            return action.hasErrored;
-
-        default:
-            return state;
-    }
-}
-
-export function itemsIsLoading(state = false, action) {
-    switch (action.type) {
-        case 'ITEMS_IS_LOADING':
-            return action.isLoading;
-
-        default:
-            return state;
-    }
-}
-
 export function items(state = [], action) {
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS': {
@@ -35,6 +15,24 @@ export function items(state = [], action) {
         case 'ADD_ITEM': {
             state.push({city: action.item, data: {}, isLoaded: false, isErrored: false});
             return state;
+        }
+
+        case 'DELETE_ITEM': {
+            let index = state.findIndex(current => current.city === action.city);
+            var copy = state.slice();
+            copy.splice(index, 1);
+            return copy;
+        }
+
+        case 'ITEMS_HAS_ERRORED': {
+            return state.map((current) => {
+                return current.city === action.city ?
+                    {
+                        ...action.items,
+                        isErrored: true
+                    }
+                    : current;
+            });
         }
 
         default:
