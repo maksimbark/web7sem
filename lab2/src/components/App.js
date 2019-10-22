@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import LargeCityInfo from "./LargeCityInfo";
 import FavoriteCityPack from './FavoriteCityPack'
 import configureStore from '../store/configureStore';
+import {PersistGate} from 'redux-persist/integration/react'
 
-
-const store = configureStore();
+const {store, persistor} = configureStore();
 
 function App() {
     return (
@@ -16,7 +16,9 @@ function App() {
             </div>
             <LargeCityInfo/>
             <Provider store={store}>
-                <FavoriteCityPack/>
+                <PersistGate loading={null} persistor={persistor}>
+                    <FavoriteCityPack/>
+                </PersistGate>
             </Provider>
         </div>
     )

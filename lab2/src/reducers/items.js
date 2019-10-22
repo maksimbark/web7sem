@@ -24,11 +24,23 @@ export function items(state = [], action) {
             return copy;
         }
 
+        case 'IS_LOADING': {
+            return state.map((current) => {
+                return current.city === action.city ?
+                    {
+                        ...current,
+                        isLoaded: false,
+                        isErrored: false
+                    }
+                    : current;
+            });
+        }
+
         case 'ITEMS_HAS_ERRORED': {
             return state.map((current) => {
                 return current.city === action.city ?
                     {
-                        ...action.items,
+                        ...current,
                         isErrored: true
                     }
                     : current;

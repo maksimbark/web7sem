@@ -37,8 +37,8 @@ class FavoriteCityPack extends Component {
                                     i++;
                                     return (
                                         [
-                                            <MiniCityInfo serverInfo={favCity}/>,
-                                            i % 2 === 0 && <div className="w-100"/>,
+                                            <MiniCityInfo key={i} serverInfo={favCity}/>,
+                                            i % 2 === 0 && <div key={-i} className="w-100"/>,
                                         ]
                                     )
 

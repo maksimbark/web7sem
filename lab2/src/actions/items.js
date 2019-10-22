@@ -36,6 +36,13 @@ export function deleteItem(city) {
     };
 }
 
+export function loading(city) {
+    return {
+        type: 'IS_LOADING',
+        city
+    };
+}
+
 export function doDeleteItem(city) {
     return (dispatch) => {
         dispatch(deleteItem(city));
@@ -57,6 +64,7 @@ export function doAddItem(item) {
 
 export function itemsFetchData(city) {
     return (dispatch) => {
+        dispatch(loading(city));
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3c6464a2f6bcbeecf2f55441edb741ce&units=metric&lang=ru`)
             .then((response) => {
                 if (!response.ok) {
