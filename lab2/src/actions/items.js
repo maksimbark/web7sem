@@ -75,7 +75,6 @@ export function itemsFetchData(city) {
             })
             .then((response) => response.json())
             .then((response) => dispatch(itemsFetchDataSuccess(response, city)))
-            .then((response) => console.log(response, city))
             .catch(() => dispatch(itemsHasErrored(city)));
     };
 

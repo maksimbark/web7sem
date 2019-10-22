@@ -7,7 +7,6 @@ class FavoriteCityPack extends Component {
 
     handleSubmit = (event) => {
        event.preventDefault();
-       console.log(this.props.newCityValue);
        this.props.add(this.props.newCityValue);
     };
 

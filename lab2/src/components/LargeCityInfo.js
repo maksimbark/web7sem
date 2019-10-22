@@ -7,7 +7,8 @@ class LargeCityInfo extends Component {
 
     state = {
         problems: false,
-        isLoaded: false
+        isLoaded: false,
+        connectProblems: false
     };
 
     componentDidMount() {
@@ -26,9 +27,21 @@ class LargeCityInfo extends Component {
             </div>
         );
 
-        if (this.state.problems) {
+      const errorMsg =(
+          <div className="alert alert-danger">Произошла ошибка при попытке получить местоположение, отображен город по-умолчанию
+              <button onClick={() => navigator.geolocation.getCurrentPosition(this.setPosition, this.setFail)}
+                      className="btn ml-auto">Повторить попытку получить местоположение
+              </button>
+          </div>
+    )
+
+        if (this.state.connectProblems) {
             return (
-                <div className="alert alert-danger">Произошла ошибка при попытке получить данные</div>
+                <div className="alert alert-danger">Произошла ошибка при попытке получить данные
+                    <button onClick={() => navigator.geolocation.getCurrentPosition(this.setPosition, this.setFail)}
+                            className="btn ml-auto">Повторить попытку получить данные
+                    </button>
+                </div>
             )
         }
 
@@ -38,6 +51,7 @@ class LargeCityInfo extends Component {
             return (
                 <div className="row">
                     <div className="col">
+                        {this.state.problems ? errorMsg : ''}
                         <h2>{this.state.serverInfo.name}</h2>
                         <div className="row">
                             <div className="col">
@@ -74,16 +88,19 @@ class LargeCityInfo extends Component {
                 }
             )
         } else {
-            this.setFail()
+            this.setState({connectProblems: true})
         }
     };
 
     setPosition = (position) => {
+        this.setState({isLoaded: false});
         this.getWeather(position.coords.latitude, position.coords.longitude);
     };
 
     setFail = () => {
-        this.setState({problems: true})
+        this.setState({isLoaded: false});
+        this.getWeather(59.937500, 30.308611);
+        this.setState({problems: true});
     };
 
 }
