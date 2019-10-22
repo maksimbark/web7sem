@@ -1,18 +1,23 @@
 import React, {Component} from 'react'
 import WeatherPack from './WeatherPack/'
+import {doAddItem, itemsFetchData} from "../actions/items";
+import {connect} from "react-redux";
+
 
 class MiniCityInfo extends Component {
-
     state = {
         problems: false,
-        isLoaded: true
+        isLoaded: false
     };
 
+    componentDidMount() {
+        this.props.fetchData(this.props.serverInfo.city);
+    }
 
     render() {
         const loadDump = (
             <div className="col text-center">
-                <h2>Происходит загрузка, подождите</h2>
+                <h2>Происходит загрузка {this.props.serverInfo.city}, подождите</h2>
                 <div className="spinner-border text-success" role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
@@ -28,7 +33,7 @@ class MiniCityInfo extends Component {
         if (this.state.isLoaded) {
             const icon = this.props.serverInfo.weather[0].icon;
             return (
-                <div className="col" style={{ paddingRight: 0 }}>
+                <div className="col">
                     <div className="d-flex flex-row align-items-center">
                         <h4 className="p-2">{this.props.serverInfo.name}</h4>
                         <h4 className="p-2 ml-auto">{this.props.serverInfo.main.temp}˚C</h4>
@@ -53,4 +58,19 @@ class MiniCityInfo extends Component {
 
 }
 
-export default MiniCityInfo
+const mapStateToProps = (state) => {
+    return {
+        //items: state.items,
+        //hasErrored: state.itemsHasErrored,
+        //isLoading: state.itemsIsLoading
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchData: (url) => dispatch(itemsFetchData(url)),
+        add: (city) => dispatch(doAddItem(city))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCityInfo);
