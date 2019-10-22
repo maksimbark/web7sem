@@ -22,12 +22,18 @@ export function items(state = [], action) {
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS': {
             return state.map((current) => {
-               return current.city === action.items.city ? action.items : current;
+                return current.city === action.items.city ?
+                    {
+                        ...action.items,
+                        isLoaded: true,
+                        isErrored: false
+                    }
+                    : current;
             });
         }
 
         case 'ADD_ITEM': {
-            state.push({city: action.item, data: {}});
+            state.push({city: action.item, data: {}, isLoaded: false, isErrored: false});
             return state;
         }
 
