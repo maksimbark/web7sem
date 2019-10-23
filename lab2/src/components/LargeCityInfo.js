@@ -28,7 +28,7 @@ class LargeCityInfo extends Component {
 
         const errorMsg = (
             <div className="alert alert-danger">Произошла ошибка при попытке получить местоположение, отображен город
-                по-умолчанию
+                по умолчанию
                 <button onClick={() => navigator.geolocation.getCurrentPosition(this.setPosition, this.setFail)}
                         className="btn ml-auto">Повторить попытку получить местоположение
                 </button>
