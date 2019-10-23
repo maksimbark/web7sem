@@ -11,15 +11,6 @@ class MiniCityInfo extends Component {
     }
 
     render() {
-        const loadDump = (
-            <div className="col col-6 text-center">
-                <h2>Происходит загрузка {this.props.serverInfo.city}, подождите</h2>
-                <div className="spinner-border text-success" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
-
         if (this.props.serverInfo.isErrored) {
             return (
                 <div className="col col-6 alert alert-danger">Произошла ошибка при попытке получить данные
@@ -55,8 +46,11 @@ class MiniCityInfo extends Component {
             )
         } else {
             return (
-                <div>
-                    {loadDump}
+                <div className="col col-6 text-center">
+                    <h2>Происходит загрузка {this.props.serverInfo.city}, подождите</h2>
+                    <div className="spinner-border text-success" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
                 </div>
             )
         }

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import WeatherPack from './WeatherPack/'
-import "./ApiRequester"
 
 
 class LargeCityInfo extends Component {
@@ -27,13 +26,14 @@ class LargeCityInfo extends Component {
             </div>
         );
 
-      const errorMsg =(
-          <div className="alert alert-danger">Произошла ошибка при попытке получить местоположение, отображен город по-умолчанию
-              <button onClick={() => navigator.geolocation.getCurrentPosition(this.setPosition, this.setFail)}
-                      className="btn ml-auto">Повторить попытку получить местоположение
-              </button>
-          </div>
-    )
+        const errorMsg = (
+            <div className="alert alert-danger">Произошла ошибка при попытке получить местоположение, отображен город
+                по-умолчанию
+                <button onClick={() => navigator.geolocation.getCurrentPosition(this.setPosition, this.setFail)}
+                        className="btn ml-auto">Повторить попытку получить местоположение
+                </button>
+            </div>
+        );
 
         if (this.state.connectProblems) {
             return (
@@ -77,19 +77,33 @@ class LargeCityInfo extends Component {
     };
 
     getWeather = async (lat, lon) => {
+        await this.setState({isLoaded: false, connectProblems: false});
 
-        let response = await fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=3c6464a2f6bcbeecf2f55441edb741ce&units=metric&lang=ru');
-        if (response.ok) {
-            let json = await response.json();
-            this.setState(
-                {
-                    serverInfo: json,
-                    isLoaded: true
+        fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=3c6464a2f6bcbeecf2f55441edb741ce&units=metric&lang=ru')
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
                 }
-            )
-        } else {
-            this.setState({connectProblems: true})
-        }
+                return response;
+
+            })
+            .then((response) => response.json())
+            .then((response) => {
+                this.setState(
+                    {
+                        serverInfo: response,
+                        isLoaded: true,
+                        connectProblems: false
+                    })
+            })
+            .catch(() => {
+                    this.setState(
+                        {
+                            connectProblems: true
+                        })
+                }
+            );
+
     };
 
     setPosition = (position) => {
