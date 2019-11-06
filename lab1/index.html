@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./node_modules/mocha/mocha.css" />
     <script src="./node_modules/mocha/mocha.js"></script>
     <script src="./node_modules/chai/chai.js"></script>
+    <script src="./node_modules/sinon/pkg/sinon.js"></script>
 <!--/tests-->
 
     <link rel="stylesheet" href="style.css?v=2" type="text/css"/>
@@ -55,12 +56,64 @@
 <div id="mocha"></div>
 
 <script>
+    const mockData = {
+        "coord": {
+        "lon": 37.62,
+            "lat": 55.75
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01n"
+        }
+    ],
+        "base": "stations",
+        "main": {
+        "temp": 277.37,
+            "pressure": 1017,
+            "humidity": 86,
+            "temp_min": 276.48,
+            "temp_max": 278.15
+    },
+    "visibility": 10000,
+        "wind": {
+        "speed": 2,
+            "deg": 240
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1569349865,
+        "sys": {
+        "type": 1,
+            "id": 9029,
+            "message": 0.0065,
+            "country": "RU",
+            "sunrise": 1569295059,
+            "sunset": 1569338749
+    },
+    "timezone": 10800,
+        "id": 524901,
+        "name": "Moscow",
+        "cod": 200
+    }
+
     expect = chai.expect;
     assert = chai.assert;
 
     describe('Положительные. Москва ->', function () {
         beforeEach(function(){
+            const willBeFaked = 'http://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=3c6464a2f6bcbeecf2f55441edb741ce';
             document.getElementById('userCity').value = "Moscow";
+            var mock = sinon.fakeServer.create();
+            mock.autoRespond = true;
+            mock.respondWith("GET", willBeFaked, [
+                200,
+                { "Content-Type": "application/json" },
+                JSON.stringify(mockData)
+            ]);
             getWeather();
         });
 
@@ -88,13 +141,29 @@
 
     describe('Отрицательные', function () {
         it('Неверный город', function () {
+            const willBeFaked = 'http://api.openweathermap.org/data/2.5/weather?q=fdsjbfdsbfjksdbjkfbdsf&appid=3c6464a2f6bcbeecf2f55441edb741ce';
             document.getElementById('userCity').value = "fdsjbfdsbfjksdbjkfbdsf";
+            var mock = sinon.fakeServer.create();
+            mock.autoRespond = true;
+            mock.respondWith("GET", willBeFaked, [
+                404,
+                { "Content-Type": "application/json" },
+                '404 NOT FOUND'
+            ]);
             getWeather();
             const res = document.getElementById('content');
             assert.include(res.innerHTML, "http://razborka-rio.ru/upload/404.jpg");
         });
         it('Нет города', function () {
+            const willBeFaked = 'http://api.openweathermap.org/data/2.5/weather?q=&appid=3c6464a2f6bcbeecf2f55441edb741ce';
             document.getElementById('userCity').value = "";
+            var mock = sinon.fakeServer.create();
+            mock.autoRespond = true;
+            mock.respondWith("GET", willBeFaked, [
+                400,
+                { "Content-Type": "application/json" },
+                '400 BAD REQUEST'
+            ]);
             getWeather();
             const res = document.getElementById('content');
             assert.include(res.innerHTML, "https://i.ytimg.com/vi/Qjlj4b27dlo/sddefault.jpg");

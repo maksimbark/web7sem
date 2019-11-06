@@ -2,7 +2,8 @@ function getWeather() {
     var enteredCity = document.getElementById('userCity').value;
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + enteredCity + '&appid=3c6464a2f6bcbeecf2f55441edb741ce', false);
+    var serchlink = 'http://api.openweathermap.org/data/2.5/weather?q=' + enteredCity + '&appid=3c6464a2f6bcbeecf2f55441edb741ce';
+    xhr.open('GET', serchlink, false);
     //xhr.open('GET', 'mock.json', false);
     xhr.send();
 
