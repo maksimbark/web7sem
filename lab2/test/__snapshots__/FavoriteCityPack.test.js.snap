@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`отображается корректно 1`] = `
+<div>
+  <div
+    className="container-fluid"
+    style={
+      Object {
+        "paddingRight": 0,
+      }
+    }
+  >
+    <div
+      className="inputForm"
+      id="form1"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <div
+          className="d-flex justify-content-end"
+          style={
+            Object {
+              "paddingBottom": 15,
+              "paddingTop": 20,
+            }
+          }
+        >
+          <h3
+            className="p-2"
+          >
+            Город 
+          </h3>
+          <input
+            className="p-2 textbox"
+            onChange={[Function]}
+            style={
+              Object {
+                "marginLeft": 10,
+              }
+            }
+            type="text"
+            value="Sochi"
+          />
+          <input
+            className="p-2 btn btn-primary"
+            style={
+              Object {
+                "marginLeft": 10,
+              }
+            }
+            type="submit"
+            value="Добавить в избранное"
+          />
+        </div>
+      </form>
+    </div>
+    <div
+      className="row"
+    >
+      <Connect(MiniCityInfo)
+        key="1"
+        serverInfo={
+          Object {
+            "city": "Moscow",
+            "data": Object {
+              "base": "stations",
+              "clouds": Object {
+                "all": 0,
+              },
+              "cod": 200,
+              "coord": Object {
+                "lat": 55.75,
+                "lon": 37.62,
+              },
+              "dt": 1569349865,
+              "id": 524901,
+              "main": Object {
+                "humidity": 86,
+                "pressure": 1017,
+                "temp": 277.37,
+                "temp_max": 278.15,
+                "temp_min": 276.48,
+              },
+              "name": "Moscow",
+              "sys": Object {
+                "country": "RU",
+                "id": 9029,
+                "message": 0.0065,
+                "sunrise": 1569295059,
+                "sunset": 1569338749,
+                "type": 1,
+              },
+              "timezone": 10800,
+              "visibility": 10000,
+              "weather": Array [
+                Object {
+                  "description": "clear sky",
+                  "icon": "01n",
+                  "id": 800,
+                  "main": "Clear",
+                },
+              ],
+              "wind": Object {
+                "deg": 240,
+                "speed": 2,
+              },
+            },
+            "isErrored": true,
+          }
+        }
+      />
+      <Connect(MiniCityInfo)
+        key="2"
+        serverInfo={
+          Object {
+            "city": "Moscow",
+            "data": Object {
+              "base": "stations",
+              "clouds": Object {
+                "all": 0,
+              },
+              "cod": 200,
+              "coord": Object {
+                "lat": 55.75,
+                "lon": 37.62,
+              },
+              "dt": 1569349865,
+              "id": 524901,
+              "main": Object {
+                "humidity": 86,
+                "pressure": 1017,
+                "temp": 277.37,
+                "temp_max": 278.15,
+                "temp_min": 276.48,
+              },
+              "name": "Moscow",
+              "sys": Object {
+                "country": "RU",
+                "id": 9029,
+                "message": 0.0065,
+                "sunrise": 1569295059,
+                "sunset": 1569338749,
+                "type": 1,
+              },
+              "timezone": 10800,
+              "visibility": 10000,
+              "weather": Array [
+                Object {
+                  "description": "clear sky",
+                  "icon": "01n",
+                  "id": 800,
+                  "main": "Clear",
+                },
+              ],
+              "wind": Object {
+                "deg": 240,
+                "speed": 2,
+              },
+            },
+            "isErrored": true,
+          }
+        }
+      />
+      <div
+        className="w-100"
+        key="-2"
+      />
+    </div>
+  </div>
+</div>
+`;

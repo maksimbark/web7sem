@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error отображается корректно 1`] = `
+<div
+  className="col col-6 alert alert-danger"
+>
+  Произошла ошибка при попытке получить данные города 
+  Moscow
+  .
+  <button
+    className="btn ml-auto"
+    onClick={[Function]}
+  >
+    Повторить попытку
+  </button>
+  <button
+    className="btn ml-auto"
+    onClick={[Function]}
+  >
+    Закрыть уведомление
+  </button>
+</div>
+`;
+
+exports[`Loaded отображается корректно 1`] = `
+<div
+  className="col col-6"
+>
+  <div
+    className="d-flex flex-row align-items-center"
+  >
+    <h4
+      className="p-2"
+    >
+      Moscow
+    </h4>
+    <h4
+      className="p-2 ml-auto"
+    >
+      277.37
+      ˚C
+    </h4>
+    <img
+      alt="icon"
+      className="p-2 ml-auto"
+      src="https://openweathermap.org/img/wn/01n.png"
+    />
+    <button
+      className="btn btn-default p-2 ml-auto"
+      onClick={[Function]}
+    >
+      X
+    </button>
+  </div>
+  <WeatherPack
+    serverInfo={
+      Object {
+        "base": "stations",
+        "clouds": Object {
+          "all": 0,
+        },
+        "cod": 200,
+        "coord": Object {
+          "lat": 55.75,
+          "lon": 37.62,
+        },
+        "dt": 1569349865,
+        "id": 524901,
+        "main": Object {
+          "humidity": 86,
+          "pressure": 1017,
+          "temp": 277.37,
+          "temp_max": 278.15,
+          "temp_min": 276.48,
+        },
+        "name": "Moscow",
+        "sys": Object {
+          "country": "RU",
+          "id": 9029,
+          "message": 0.0065,
+          "sunrise": 1569295059,
+          "sunset": 1569338749,
+          "type": 1,
+        },
+        "timezone": 10800,
+        "visibility": 10000,
+        "weather": Array [
+          Object {
+            "description": "clear sky",
+            "icon": "01n",
+            "id": 800,
+            "main": "Clear",
+          },
+        ],
+        "wind": Object {
+          "deg": 240,
+          "speed": 2,
+        },
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Loading отображается корректно 1`] = `
+<div
+  className="col col-6 text-center"
+>
+  <h2>
+    Происходит загрузка 
+    Moscow
+    , подождите
+  </h2>
+  <div
+    className="spinner-border text-success"
+    role="status"
+  >
+    <span
+      className="sr-only"
+    >
+      Loading...
+    </span>
+  </div>
+</div>
+`;

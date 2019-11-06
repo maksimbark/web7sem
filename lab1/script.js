@@ -1,11 +1,3 @@
-window.onload = function () {
-    document.getElementById("form1")
-        .addEventListener("submit", function (event) {
-            event.preventDefault();
-            getWeather();
-        });
-}
-
 function getWeather() {
     var enteredCity = document.getElementById('userCity').value;
 

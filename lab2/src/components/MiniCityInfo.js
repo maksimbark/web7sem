@@ -4,7 +4,7 @@ import {doDeleteItem, itemsFetchData} from "../actions/items";
 import {connect} from "react-redux";
 
 
-class MiniCityInfo extends Component {
+export class MiniCityInfo extends Component {
 
     componentDidMount() {
         this.props.fetchData(this.props.serverInfo.city);

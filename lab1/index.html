@@ -1,10 +1,28 @@
 <html>
 
 <head>
+
     <meta charset="utf-8">
+
+<!--tests-->
+    <link rel="stylesheet" href="./node_modules/mocha/mocha.css" />
+    <script src="./node_modules/mocha/mocha.js"></script>
+    <script src="./node_modules/chai/chai.js"></script>
+<!--/tests-->
+
     <link rel="stylesheet" href="style.css?v=2" type="text/css"/>
     <script src="./doT.min.js" type="text/javascript"></script>
     <script src="./script.js" type="text/javascript"></script>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("form1")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    getWeather();
+                });
+        };
+    </script>
 
     <script id="pagetmpl" type="text/x-dot-template">
         <h2>Weather in city {{=it.city}}</h2>
@@ -32,6 +50,61 @@
 </div>
 
 <div id="content"></div>
+
+
+<div id="mocha"></div>
+
+<script>
+    expect = chai.expect;
+    assert = chai.assert;
+
+    describe('Положительные. Москва ->', function () {
+        beforeEach(function(){
+            document.getElementById('userCity').value = "Moscow";
+            getWeather();
+        });
+
+        it('Заголовок', function () {
+            const res = document.getElementById('content');
+            assert.include(res.innerHTML, "<h2>Weather in city Moscow</h2>");
+        });
+        it('Температура', function () {
+            const res = document.getElementById('content');
+            assert.match(res.innerHTML, /Temperature: \d+\.\d+ ˚C/);
+        });
+        it('Скорость ветра', function () {
+            const res = document.getElementById('content');
+            assert.match(res.innerHTML, /Wind Speed: \d+ m\/s/);
+        });
+       it('Давление', function () {
+            const res = document.getElementById('content');
+           assert.match(res.innerHTML, /Pressure: \d+ hPa/);
+        });
+        it('Влажность', function () {
+            const res = document.getElementById('content');
+            assert.match(res.innerHTML, /Humidity: \d+ %/);
+        });
+    });
+
+    describe('Отрицательные', function () {
+        it('Неверный город', function () {
+            document.getElementById('userCity').value = "fdsjbfdsbfjksdbjkfbdsf";
+            getWeather();
+            const res = document.getElementById('content');
+            assert.include(res.innerHTML, "http://razborka-rio.ru/upload/404.jpg");
+        });
+        it('Нет города', function () {
+            document.getElementById('userCity').value = "";
+            getWeather();
+            const res = document.getElementById('content');
+            assert.include(res.innerHTML, "https://i.ytimg.com/vi/Qjlj4b27dlo/sddefault.jpg");
+        });
+    });
+
+    mocha.run();
+
+</script>
+
 </body>
 
 </html>

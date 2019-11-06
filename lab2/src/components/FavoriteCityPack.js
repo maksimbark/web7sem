@@ -3,7 +3,7 @@ import MiniCityInfo from './MiniCityInfo'
 import {doAddItem, doChangeInput, itemsFetchData} from "../actions/items";
 import {connect} from "react-redux";
 
-class FavoriteCityPack extends Component {
+export class FavoriteCityPack extends Component {
 
     handleSubmit = (event) => {
        event.preventDefault();

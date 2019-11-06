@@ -14,3 +14,6 @@
 ```npm install```
 2. run
 ```npm start```
+
+# to run tests
+run ```npm run test```

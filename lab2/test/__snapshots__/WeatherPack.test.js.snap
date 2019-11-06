@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`отображается корректно 1`] = `
+<ul
+  className="weather-list__li"
+>
+  <li>
+    <div
+      className="alert alert-dark d-flex"
+    >
+      <div>
+        Температура
+      </div>
+      <div
+        className="ml-auto"
+      >
+        277.37 ˚C
+      </div>
+    </div>
+  </li>
+  <li>
+    <div
+      className="alert alert-dark d-flex"
+    >
+      <div>
+        Скорость ветра
+      </div>
+      <div
+        className="ml-auto"
+      >
+        2 м/с
+      </div>
+    </div>
+  </li>
+  <li>
+    <div
+      className="alert alert-dark d-flex"
+    >
+      <div>
+        Состояние неба
+      </div>
+      <div
+        className="ml-auto"
+      >
+        clear sky
+      </div>
+    </div>
+  </li>
+  <li>
+    <div
+      className="alert alert-dark d-flex"
+    >
+      <div>
+        Давление
+      </div>
+      <div
+        className="ml-auto"
+      >
+        1017 КПа
+      </div>
+    </div>
+  </li>
+  <li>
+    <div
+      className="alert alert-dark d-flex"
+    >
+      <div>
+        Влажность
+      </div>
+      <div
+        className="ml-auto"
+      >
+        86 %
+      </div>
+    </div>
+  </li>
+</ul>
+`;
