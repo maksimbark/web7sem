@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`отображается корректно 1`] = `
+<div
+  className="alert alert-dark d-flex"
+>
+  <div>
+    Влажность
+  </div>
+  <div
+    className="ml-auto"
+  >
+    123 %
+  </div>
+</div>
+`;
