@@ -43,7 +43,7 @@ app.get('/weather/coordinates', (req, res) => {
 });
 
 app.get('/favourites', (req, res) => {
-    conn.query("SELECT * FROM favcity")
+    conn.query("SELECT * FROM FAVCITY")
         .then(result => {
             res.send(result[0]);
         })
@@ -52,16 +52,16 @@ app.get('/favourites', (req, res) => {
 
 app.post('/favourites', (req, res) => {
     console.log();
-    conn.execute('insert into `favcity` (`NAME`) VALUES (?)', [req.body.city.alphaNumeric()])
+    conn.execute('insert into `FAVCITY` (`NAME`) VALUES (?)', [req.body.city.alphaNumeric()])
         .then(() => res.send("200 OK POSTED"))
-        .catch((e) => console.log(e))
+        .catch((e) => res.status(500).send({"error":e}))
 });
 
 app.delete('/favourites', (req, res) => {
     console.log();
-    conn.execute('delete from `favcity` WHERE `NAME` = ?', [req.body.city.alphaNumeric()])
+    conn.execute('delete from `FAVCITY` WHERE `NAME` = ?', [req.body.city.alphaNumeric()])
         .then(() => res.send("200 OK DELETED"))
-        .catch((e) => console.log(e))
+        .catch((e) => res.status(500).send({"error":e}))
 });
 
 app.listen(port, () => console.log('Слушаю порт ', port));

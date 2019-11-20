@@ -13,13 +13,14 @@ export function items(state = [], action) {
         }
 
         case 'ADD_ITEM': {
-            state.push({city: action.item, data: {}, isLoaded: false, isErrored: false});
-            return state;
+            let copy = state.slice();
+            copy.push({city: action.item, data: {}, isLoaded: false, isErrored: false});
+            return copy;
         }
 
         case 'DELETE_ITEM': {
             let index = state.findIndex(current => current.city === action.city);
-            var copy = state.slice();
+            let copy = state.slice();
             copy.splice(index, 1);
             return copy;
         }
@@ -67,6 +68,19 @@ export function newCityValue(state = '', action) {
         }
         case 'CHANGE_INPUT': {
             return action.item
+        }
+        default:
+            return state;
+    }
+}
+
+export function errorHandler(state = false, action) {
+    switch (action.type) {
+        case 'CANNOT_ADD': {
+            return true;
+        }
+        case 'CHANGE_INPUT': {
+            return false;
         }
         default:
             return state;

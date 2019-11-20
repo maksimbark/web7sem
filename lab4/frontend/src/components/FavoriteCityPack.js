@@ -7,7 +7,7 @@ export class FavoriteCityPack extends Component {
 
     handleSubmit = (event) => {
        event.preventDefault();
-       this.props.add(this.props.newCityValue);
+       this.props.add(this.props.newCityValue, this.props.items);
     };
 
     handleChange = (event) => {
@@ -19,8 +19,16 @@ export class FavoriteCityPack extends Component {
     }
 
     render() {
+        let errorInInput = "";
+        if (this.props.errorHandler) {
+         errorInInput = <div className="alert alert-danger" role="alert">
+             Ошибка добавления города. Проверьте, не повторяетcя ли город.
+         </div>
+        }
+
         return (
             <div>
+                {errorInInput}
                 <div className="container-fluid" style={{paddingRight: 0}}>
                     <div className="inputForm" id="form1">
                         <form onSubmit={this.handleSubmit}>
@@ -61,13 +69,14 @@ const mapStateToProps = (state) => {
     return {
         newCityValue: state.newCityValue,
         items: state.items,
+        errorHandler: state.errorHandler
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => dispatch(itemsFetchData(url)),
-        add: (city) => dispatch(doAddItem(city)),
+        add: (city, cityList) => dispatch(doAddItem(city, cityList)),
         changeInput: (input) => dispatch(doChangeInput(input)),
         updateList: () => dispatch(doUpdateList())
     };

@@ -68,7 +68,7 @@ export function doDeleteItem(item) {
                 return response;
             })
             .then(() => dispatch(deleteItem(item)))
-            .catch(() => dispatch(itemsHasErrored(item)));
+            .catch(() => dispatch(cannotAddCity()));
     };
 }
 
@@ -78,26 +78,36 @@ export function doChangeInput(item) {
     };
 }
 
-export function doAddItem(item) {
-    return (dispatch) => {
-        fetch(`http://localhost:3001/favourites`,
-            {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({"city": item})
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                return response;
-            })
-            .then(() => dispatch(itemsAddItem(item)))
-            .catch(() => dispatch(itemsHasErrored(item)));
-    };
+export function doAddItem(item, itemList) {
+    let duplicate = false;
+    itemList.map((current) => {
+        if (current.city.toLowerCase() === item.toLowerCase()) {
+            duplicate = true;
+        }
+    });
+    if (!duplicate) {
+        return (dispatch) => {
+            fetch(`http://localhost:3001/favourites`,
+                {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({"city": item})
+                })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw Error(response.statusText);
+                    }
+                    return response;
+                })
+                .then(() => dispatch(itemsAddItem(item)))
+                .catch(() => dispatch(cannotAddCity()));
+        };
+    } else {
+        return (dispatch) => dispatch(cannotAddCity())
+    }
 }
 
 export function doUpdateList() {
@@ -134,4 +144,10 @@ export function itemsFetchData(city) {
             .catch(() => dispatch(itemsHasErrored(city)));
     };
 
+}
+
+export function cannotAddCity() {
+    return {
+        type: 'CANNOT_ADD'
+    };
 }
