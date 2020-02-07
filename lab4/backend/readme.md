@@ -5,7 +5,7 @@ Sample:
 ```
    DB_HOST="example.com"
    DB_USER="user"
-   DB_NAME=nameofbase"
+   DB_NAME="nameofbase"
    DB_PASSWORD="qwerty"
    WEATHER_API_KEY="6g88dsa6dbs7"
 ```
